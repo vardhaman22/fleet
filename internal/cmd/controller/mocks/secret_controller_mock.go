@@ -12,11 +12,13 @@ import (
 	gomock "github.com/golang/mock/gomock"
 	v1 "github.com/rancher/wrangler/pkg/generated/controllers/core/v1"
 	generic "github.com/rancher/wrangler/pkg/generic"
+	corev1 "k8s.io/api/core/v1"
 	v10 "k8s.io/api/core/v1"
 	v11 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	schema "k8s.io/apimachinery/pkg/runtime/schema"
 	types "k8s.io/apimachinery/pkg/types"
 	watch "k8s.io/apimachinery/pkg/watch"
+	"k8s.io/client-go/rest"
 	cache "k8s.io/client-go/tools/cache"
 )
 
@@ -68,7 +70,7 @@ func (mr *MockSecretControllerMockRecorder) AddGenericRemoveHandler(arg0, arg1, 
 }
 
 // Cache mocks base method.
-func (m *MockSecretController) Cache() v1.SecretCache {
+func (m *MockSecretController) Cache() generic.CacheInterface[*corev1.Secret] {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "Cache")
 	ret0, _ := ret[0].(v1.SecretCache)
@@ -193,7 +195,7 @@ func (mr *MockSecretControllerMockRecorder) List(arg0, arg1 interface{}) *gomock
 }
 
 // OnChange mocks base method.
-func (m *MockSecretController) OnChange(arg0 context.Context, arg1 string, arg2 v1.SecretHandler) {
+func (m *MockSecretController) OnChange(arg0 context.Context, arg1 string, arg2 generic.ObjectHandler[*corev1.Secret]) {
 	m.ctrl.T.Helper()
 	m.ctrl.Call(m, "OnChange", arg0, arg1, arg2)
 }
@@ -205,7 +207,7 @@ func (mr *MockSecretControllerMockRecorder) OnChange(arg0, arg1, arg2 interface{
 }
 
 // OnRemove mocks base method.
-func (m *MockSecretController) OnRemove(arg0 context.Context, arg1 string, arg2 v1.SecretHandler) {
+func (m *MockSecretController) OnRemove(arg0 context.Context, arg1 string, arg2 generic.ObjectHandler[*corev1.Secret]) {
 	m.ctrl.T.Helper()
 	m.ctrl.Call(m, "OnRemove", arg0, arg1, arg2)
 }
@@ -278,4 +280,30 @@ func (m *MockSecretController) Watch(arg0 string, arg1 v11.ListOptions) (watch.I
 func (mr *MockSecretControllerMockRecorder) Watch(arg0, arg1 interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "Watch", reflect.TypeOf((*MockSecretController)(nil).Watch), arg0, arg1)
+}
+
+func (m *MockSecretController) UpdateStatus(arg0 *corev1.Secret) (*corev1.Secret, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "UpdateStatus", arg0)
+	ret0, _ := ret[0].(*corev1.Secret)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+func (mr *MockSecretControllerMockRecorder) UpdateStatus(arg0 interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "UpdateStatus", reflect.TypeOf((*MockSecretController)(nil).UpdateStatus), arg0)
+}
+
+func (m *MockSecretController) WithImpersonation(arg0 rest.ImpersonationConfig) (generic.ClientInterface[*corev1.Secret, *corev1.SecretList], error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "WithImpersonation", arg0)
+	ret0, _ := ret[0].(generic.ClientInterface[*corev1.Secret, *corev1.SecretList])
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+func (mr *MockSecretControllerMockRecorder) WithImpersonation(arg0 interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "WithImpersonation", reflect.TypeOf((*MockSecretController)(nil).WithImpersonation), arg0)
 }

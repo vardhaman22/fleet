@@ -18,6 +18,7 @@ import (
 	types "k8s.io/apimachinery/pkg/types"
 	watch "k8s.io/apimachinery/pkg/watch"
 	cache "k8s.io/client-go/tools/cache"
+	rest "k8s.io/client-go/rest"
 )
 
 // MockNamespaceController is a mock of NamespaceController interface.
@@ -68,7 +69,7 @@ func (mr *MockNamespaceControllerMockRecorder) AddGenericRemoveHandler(arg0, arg
 }
 
 // Cache mocks base method.
-func (m *MockNamespaceController) Cache() v1.NamespaceCache {
+func (m *MockNamespaceController) Cache() generic.NonNamespacedCacheInterface[*v10.Namespace] {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "Cache")
 	ret0, _ := ret[0].(v1.NamespaceCache)
@@ -193,7 +194,7 @@ func (mr *MockNamespaceControllerMockRecorder) List(arg0 interface{}) *gomock.Ca
 }
 
 // OnChange mocks base method.
-func (m *MockNamespaceController) OnChange(arg0 context.Context, arg1 string, arg2 v1.NamespaceHandler) {
+func (m *MockNamespaceController) OnChange(arg0 context.Context, arg1 string, arg2 generic.ObjectHandler[*v10.Namespace]) {
 	m.ctrl.T.Helper()
 	m.ctrl.Call(m, "OnChange", arg0, arg1, arg2)
 }
@@ -205,7 +206,7 @@ func (mr *MockNamespaceControllerMockRecorder) OnChange(arg0, arg1, arg2 interfa
 }
 
 // OnRemove mocks base method.
-func (m *MockNamespaceController) OnRemove(arg0 context.Context, arg1 string, arg2 v1.NamespaceHandler) {
+func (m *MockNamespaceController) OnRemove(arg0 context.Context, arg1 string, arg2 generic.ObjectHandler[*v10.Namespace]) {
 	m.ctrl.T.Helper()
 	m.ctrl.Call(m, "OnRemove", arg0, arg1, arg2)
 }
@@ -293,4 +294,18 @@ func (m *MockNamespaceController) Watch(arg0 v11.ListOptions) (watch.Interface, 
 func (mr *MockNamespaceControllerMockRecorder) Watch(arg0 interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "Watch", reflect.TypeOf((*MockNamespaceController)(nil).Watch), arg0)
+}
+
+
+func (m *MockNamespaceController) WithImpersonation(arg0 rest.ImpersonationConfig) (generic.NonNamespacedClientInterface[*v10.Namespace, *v10.NamespaceList], error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "WithImpersonation", arg0)
+	ret0, _ := ret[0].(generic.NonNamespacedClientInterface[*v10.Namespace, *v10.NamespaceList])
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+func (mr *MockNamespaceControllerMockRecorder) WithImpersonation(arg0 interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "WithImpersonation", reflect.TypeOf((*MockSecretController)(nil).WithImpersonation), arg0)
 }

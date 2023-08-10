@@ -8,7 +8,8 @@ import (
 	reflect "reflect"
 
 	gomock "github.com/golang/mock/gomock"
-	v1 "github.com/rancher/wrangler/pkg/generated/controllers/core/v1"
+	"github.com/rancher/wrangler/pkg/generic"
+	corev1 "k8s.io/api/core/v1"
 	v10 "k8s.io/api/core/v1"
 	labels "k8s.io/apimachinery/pkg/labels"
 )
@@ -37,7 +38,7 @@ func (m *MockSecretCache) EXPECT() *MockSecretCacheMockRecorder {
 }
 
 // AddIndexer mocks base method.
-func (m *MockSecretCache) AddIndexer(arg0 string, arg1 v1.SecretIndexer) {
+func (m *MockSecretCache) AddIndexer(arg0 string, arg1 generic.Indexer[*corev1.Secret]) {
 	m.ctrl.T.Helper()
 	m.ctrl.Call(m, "AddIndexer", arg0, arg1)
 }
