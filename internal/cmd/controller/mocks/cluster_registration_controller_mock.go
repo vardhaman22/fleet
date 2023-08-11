@@ -18,6 +18,7 @@ import (
 	types "k8s.io/apimachinery/pkg/types"
 	watch "k8s.io/apimachinery/pkg/watch"
 	cache "k8s.io/client-go/tools/cache"
+	rest "k8s.io/client-go/rest"
 )
 
 // MockClusterRegistrationController is a mock of ClusterRegistrationController interface.
@@ -68,7 +69,7 @@ func (mr *MockClusterRegistrationControllerMockRecorder) AddGenericRemoveHandler
 }
 
 // Cache mocks base method.
-func (m *MockClusterRegistrationController) Cache() v1alpha10.ClusterRegistrationCache {
+func (m *MockClusterRegistrationController) Cache() generic.CacheInterface[*v1alpha1.ClusterRegistration] {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "Cache")
 	ret0, _ := ret[0].(v1alpha10.ClusterRegistrationCache)
@@ -193,7 +194,7 @@ func (mr *MockClusterRegistrationControllerMockRecorder) List(arg0, arg1 interfa
 }
 
 // OnChange mocks base method.
-func (m *MockClusterRegistrationController) OnChange(arg0 context.Context, arg1 string, arg2 v1alpha10.ClusterRegistrationHandler) {
+func (m *MockClusterRegistrationController) OnChange(arg0 context.Context, arg1 string, arg2 generic.ObjectHandler[*v1alpha1.ClusterRegistration]) {
 	m.ctrl.T.Helper()
 	m.ctrl.Call(m, "OnChange", arg0, arg1, arg2)
 }
@@ -205,7 +206,7 @@ func (mr *MockClusterRegistrationControllerMockRecorder) OnChange(arg0, arg1, ar
 }
 
 // OnRemove mocks base method.
-func (m *MockClusterRegistrationController) OnRemove(arg0 context.Context, arg1 string, arg2 v1alpha10.ClusterRegistrationHandler) {
+func (m *MockClusterRegistrationController) OnRemove(arg0 context.Context, arg1 string, arg2 generic.ObjectHandler[*v1alpha1.ClusterRegistration]) {
 	m.ctrl.T.Helper()
 	m.ctrl.Call(m, "OnRemove", arg0, arg1, arg2)
 }
@@ -293,4 +294,18 @@ func (m *MockClusterRegistrationController) Watch(arg0 string, arg1 v1.ListOptio
 func (mr *MockClusterRegistrationControllerMockRecorder) Watch(arg0, arg1 interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "Watch", reflect.TypeOf((*MockClusterRegistrationController)(nil).Watch), arg0, arg1)
+}
+
+
+func (m *MockClusterRegistrationController) WithImpersonation(arg0 rest.ImpersonationConfig) (generic.ClientInterface[*v1alpha1.ClusterRegistration, *v1alpha1.ClusterRegistrationList], error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "WithImpersonation", arg0)
+	ret0, _ := ret[0].(generic.ClientInterface[*v1alpha1.ClusterRegistration, *v1alpha1.ClusterRegistrationList])
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+func (mr *MockClusterRegistrationControllerMockRecorder) WithImpersonation(arg0 interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "WithImpersonation", reflect.TypeOf((*MockClusterRegistrationController)(nil).WithImpersonation), arg0)
 }

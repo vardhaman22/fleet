@@ -9,7 +9,7 @@ import (
 
 	gomock "github.com/golang/mock/gomock"
 	v1alpha1 "github.com/rancher/fleet/pkg/apis/fleet.cattle.io/v1alpha1"
-	v1alpha10 "github.com/rancher/fleet/pkg/generated/controllers/fleet.cattle.io/v1alpha1"
+	"github.com/rancher/wrangler/pkg/generic"
 	labels "k8s.io/apimachinery/pkg/labels"
 )
 
@@ -37,7 +37,7 @@ func (m *MockClusterCache) EXPECT() *MockClusterCacheMockRecorder {
 }
 
 // AddIndexer mocks base method.
-func (m *MockClusterCache) AddIndexer(arg0 string, arg1 v1alpha10.ClusterIndexer) {
+func (m *MockClusterCache) AddIndexer(arg0 string, arg1 generic.Indexer[*v1alpha1.Cluster]) {
 	m.ctrl.T.Helper()
 	m.ctrl.Call(m, "AddIndexer", arg0, arg1)
 }

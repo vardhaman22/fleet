@@ -307,5 +307,5 @@ func (m *MockNamespaceController) WithImpersonation(arg0 rest.ImpersonationConfi
 
 func (mr *MockNamespaceControllerMockRecorder) WithImpersonation(arg0 interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "WithImpersonation", reflect.TypeOf((*MockSecretController)(nil).WithImpersonation), arg0)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "WithImpersonation", reflect.TypeOf((*MockNamespaceController)(nil).WithImpersonation), arg0)
 }

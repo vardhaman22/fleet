@@ -9,8 +9,9 @@ import (
 
 	gomock "github.com/golang/mock/gomock"
 	v1alpha1 "github.com/rancher/fleet/pkg/apis/fleet.cattle.io/v1alpha1"
-	v1alpha10 "github.com/rancher/fleet/pkg/generated/controllers/fleet.cattle.io/v1alpha1"
+	"github.com/rancher/wrangler/pkg/generic"
 	labels "k8s.io/apimachinery/pkg/labels"
+	
 )
 
 // MockBundleDeploymentCache is a mock of BundleDeploymentCache interface.
@@ -37,7 +38,7 @@ func (m *MockBundleDeploymentCache) EXPECT() *MockBundleDeploymentCacheMockRecor
 }
 
 // AddIndexer mocks base method.
-func (m *MockBundleDeploymentCache) AddIndexer(arg0 string, arg1 v1alpha10.BundleDeploymentIndexer) {
+func (m *MockBundleDeploymentCache) AddIndexer(arg0 string, arg1 generic.Indexer[*v1alpha1.BundleDeployment]) {
 	m.ctrl.T.Helper()
 	m.ctrl.Call(m, "AddIndexer", arg0, arg1)
 }

@@ -9,9 +9,11 @@ import (
 
 	gomock "github.com/golang/mock/gomock"
 	v1alpha1 "github.com/rancher/fleet/pkg/apis/fleet.cattle.io/v1alpha1"
+	"github.com/rancher/wrangler/pkg/generic"
 	v1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	types "k8s.io/apimachinery/pkg/types"
 	watch "k8s.io/apimachinery/pkg/watch"
+	rest "k8s.io/client-go/rest"
 )
 
 // MockClusterClient is a mock of ClusterClient interface.
@@ -159,4 +161,19 @@ func (m *MockClusterClient) Watch(arg0 string, arg1 v1.ListOptions) (watch.Inter
 func (mr *MockClusterClientMockRecorder) Watch(arg0, arg1 interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "Watch", reflect.TypeOf((*MockClusterClient)(nil).Watch), arg0, arg1)
+}
+
+
+
+func (m *MockClusterClient) WithImpersonation(arg0 rest.ImpersonationConfig) (generic.ClientInterface[*v1alpha1.Cluster, *v1alpha1.ClusterList], error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "WithImpersonation", arg0)
+	ret0, _ := ret[0].(generic.ClientInterface[*v1alpha1.Cluster, *v1alpha1.ClusterList])
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+func (mr *MockClusterClientMockRecorder) WithImpersonation(arg0 interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "WithImpersonation", reflect.TypeOf((*MockClusterClient)(nil).WithImpersonation), arg0)
 }
