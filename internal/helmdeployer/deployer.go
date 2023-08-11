@@ -407,7 +407,6 @@ func (h *Helm) install(bundleID string, manifest *manifest.Manifest, chart *char
 				u.APIVersions = cfg.Capabilities.APIVersions
 			}
 		}
-		u.ForceAdopt = options.Helm.TakeOwnership
 		u.EnableDNS = true
 		u.Replace = true
 		u.ReleaseName = releaseName
@@ -427,7 +426,6 @@ func (h *Helm) install(bundleID string, manifest *manifest.Manifest, chart *char
 	}
 
 	u := action.NewUpgrade(&cfg)
-	u.Adopt = true
 	u.EnableDNS = true
 	u.Force = options.Helm.Force
 	u.Atomic = options.Helm.Atomic

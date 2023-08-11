@@ -250,13 +250,13 @@ spec:
                 properties:
                   autoPartitionSize:
                     nullable: true
-                    type: string
+                    x-kubernetes-int-or-string: true
                   maxUnavailable:
                     nullable: true
-                    type: string
+                    x-kubernetes-int-or-string: true
                   maxUnavailablePartitions:
                     nullable: true
-                    type: string
+                    x-kubernetes-int-or-string: true
                   partitions:
                     items:
                       properties:
@@ -324,7 +324,7 @@ spec:
                           type: object
                         maxUnavailable:
                           nullable: true
-                          type: string
+                          x-kubernetes-int-or-string: true
                         name:
                           nullable: true
                           type: string
@@ -2435,6 +2435,15 @@ spec:
               agentResources:
                 nullable: true
                 properties:
+                  claims:
+                    items:
+                      properties:
+                        name:
+                          nullable: true
+                          type: string
+                      type: object
+                    nullable: true
+                    type: array
                   limits:
                     additionalProperties:
                       nullable: true
